@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:AppShopping.ViewModels"
              xmlns:enums="clr-namespace:AppShopping.Libary.Enums"
-             x:Name="StorePage"
-             x:Class="AppShopping.Views.Stores">
+             x:Name="RestaurantsPage"
+             x:Class="AppShopping.Views.Restaurants">
     <Shell.TitleView>
         <ContentView>
             <Image Source="TitleViewLogo" HorizontalOptions="Start"
@@ -12,11 +12,11 @@
         </ContentView>
     </Shell.TitleView>
     <ContentPage.BindingContext>
-        <viewModels:StoresViewModel>
+        <viewModels:RestaurantViewModel>
             <x:Arguments>
-                <enums:EstablishmentType>Store</enums:EstablishmentType>
+                <enums:EstablishmentType>Restaurant</enums:EstablishmentType>
             </x:Arguments>
-        </viewModels:StoresViewModel>
+        </viewModels:RestaurantViewModel>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
@@ -32,7 +32,7 @@
                         <ContentView Padding="10">
                             <Frame>
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference StorePage}, Path=BindingContext.DetailCommand}" CommandParameter="{Binding .}"/>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference RestaurantsPage}, Path=BindingContext.DetailCommand}" CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>
                                 <Grid ColumnDefinitions="1*,1,2*" RowDefinitions="96" >
                                     <Image Source="{Binding Logo}" HeightRequest="80" Margin="10"/>
