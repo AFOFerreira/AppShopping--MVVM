@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AppShopping
+namespace AppShopping.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Menu : Shell
+    public partial class TicketScan : ContentPage
     {
-        public Menu()
+        public TicketScan()
         {
             InitializeComponent();
-
-            Routing.RegisterRoute("establishment/Detail", typeof(Views.EstablishmentDetail));
-            Routing.RegisterRoute("film/detail", typeof(Views.FilmDetail));
         }
     }
 }

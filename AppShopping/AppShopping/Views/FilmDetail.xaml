@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:AppShopping.ViewModels"
+             x:Class="AppShopping.Views.FilmDetail">
+
+    <ContentPage.BindingContext>
+        <viewModel:FilmDetailViewModel />
+    </ContentPage.BindingContext>
+    <Shell.TitleView>
+        <ContentView>
+            <Image Source="TitleViewLogo" HorizontalOptions="Start"
+                   VerticalOptions="Center" HeightRequest="30"/>
+        </ContentView>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding Film.SessionGroups}" IsGrouped="True">
+            <CollectionView.Header>
+                <StackLayout Padding="10,10,10,0">
+                    <Label Text="Filme" Style="{StaticResource TitleType}"/>
+                    <Label Text="{Binding Film.Name}" Style="{StaticResource TitleName}"/>
+                    <Frame Padding="10" Margin="0,15,0,15">
+                        <Label Text="{Binding Film.Description}" />
+                    </Frame>
+                    <Label Text="Sessões" Style="{StaticResource TitleType}"/>
+                </StackLayout>
+            </CollectionView.Header>
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ContentView >
+                        <Label Text="{Binding Name}" Style="{StaticResource SessionTitle}" Margin="10,10,10,0"/>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView Padding="10,5">
+                        <Frame Padding="10" BorderColor="{StaticResource PrimaryColor}">
+                            <Label Text="{Binding .}" HorizontalOptions="Center" TextColor="{StaticResource PrimaryColor}" FontSize="24"/>
+                        </Frame>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>

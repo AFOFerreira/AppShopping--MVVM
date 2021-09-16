@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppShopping.Views.TicketScan"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:AppShopping.ViewModels">
+    <Shell.TitleView>
+        <ContentView>
+            <Image
+                HeightRequest="30"
+                HorizontalOptions="Start"
+                Source="TitleViewLogo"
+                VerticalOptions="Center" />
+        </ContentView>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <viewModels:TicketScanViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Style="{StaticResource TitleType}" Text="Pague o seu" />
+            <Label Style="{StaticResource TitleName}" Text="TICKET" />
+            <Grid
+                Margin="0,15"
+                ColumnDefinitions="*,70"
+                RowDefinitions="50">
+                <Frame
+                    Padding="10,0"
+                    BorderColor="{StaticResource BorderColor}"
+                    CornerRadius="0"
+                    HasShadow="False">
+                    <Entry Placeholder="Escanear Ticket" Text="{Binding TicketNumber}" />
+                </Frame>
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding TicketScanCommand}"
+                    ImageSource="camera"
+                    Style="{StaticResource PrimaryButton}" />
+            </Grid>
+            <Label Text="{Binding Message}" TextColor="{StaticResource ErroColor}" />
+            <Button
+                Command="{Binding TicketPaidHistoryCommand}"
+                HorizontalOptions="Center"
+                Style="{StaticResource TicketButton}"
+                Text="Tickets Pagos"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
