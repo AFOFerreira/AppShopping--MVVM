@@ -116,5 +116,13 @@
             <Setter Property="FontSize" Value="14" />
             <Setter Property="TextColor" Value="{StaticResource Black}" />
         </Style>
+
+        <Style x:Key="EntryPayment" TargetType="Entry">
+            <Setter Property="FontFamily" Value="MontserratRegular" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="VerticalOptions" Value="Start" />
+        </Style>
     </Application.Resources>
 </Application>
