@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppShopping.Views.TicketPaymentSuccess"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:AppShopping.Libary.Converter"
+    xmlns:viewModel="clr-namespace:AppShopping.ViewModels"
+    xmlns:yummi="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <Shell.TitleView>
+        <ContentView>
+            <Image
+                HeightRequest="30"
+                HorizontalOptions="Start"
+                Source="TitleViewLogo"
+                VerticalOptions="Center" />
+        </ContentView>
+    </Shell.TitleView>
+
+    <ContentPage.BindingContext>
+        <viewModel:TicketPaymentSucess />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PassingTimeConverter x:Key="PassingTimeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Style="{StaticResource TitleName}" Text="TICKET" />
+
+            <!--  Informações do ticket  -->
+            <yummi:PancakeView
+                Margin="1"
+                Padding="10"
+                BackgroundColor="{StaticResource White}">
+                <yummi:PancakeView.Border>
+                    <yummi:Border
+                        DashPattern="4,10"
+                        Thickness="1"
+                        Color="#000000" />
+                </yummi:PancakeView.Border>
+                <StackLayout>
+                    <Label FontSize="14" Style="{StaticResource NameEtablishmentLabel}">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}Ticket #{0}">
+                                <Binding Path="Ticket.Number" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <StackLayout Margin="0,20,0,0" Orientation="Horizontal">
+                        <Label Style="{StaticResource DescriptionEtablishmentLabel}" Text="Permanencia:" />
+                        <Label Style="{StaticResource DescriptionEtablishmentLabel}" Text="{Binding Ticket, Converter={StaticResource PassingTimeConverter}}" />
+                    </StackLayout>
+                    <Label Style="{StaticResource DescriptionEtablishmentLabel}">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}Entrada: {0}">
+                                <Binding Path="Ticket.StartDate" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label Style="{StaticResource DescriptionEtablishmentLabel}">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}Saida: {0}">
+                                <Binding Path="Ticket.EndDate" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label FontSize="12" Style="{StaticResource Subtitle}">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}Valor: R${0}">
+                                <Binding Path="Ticket.Price" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </StackLayout>
+            </yummi:PancakeView>
+
+            <Label
+                HorizontalOptions="Center"
+                Style="{StaticResource TitleType}"
+                Text="Pagamento aprovado"
+                TextColor="{StaticResource SucessColor}"
+                VerticalOptions="Center" />
+            <Label
+                Margin="0,10,0,0"
+                HorizontalOptions="Center"
+                Style="{StaticResource TitleType}"
+                Text="Tolerância"
+                VerticalOptions="Center" />
+            <Label
+                FontSize="38"
+                HorizontalOptions="Center"
+                Style="{StaticResource TitleName}"
+                Text="30 min"
+                VerticalOptions="Center" />
+            <Button
+                Margin="0,20"
+                Command="{Binding OkCommand}"
+                HorizontalOptions="Center"
+                Style="{StaticResource TicketButton}"
+                Text="OK"
+                VerticalOptions="End"
+                WidthRequest="115" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

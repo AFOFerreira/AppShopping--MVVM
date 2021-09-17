@@ -101,6 +101,11 @@
                             FontSize="14"
                             Style="{StaticResource DescriptionEtablishmentLabel}"
                             Text="Coloque o cartão de crédito para pagar o estacionamento." />
+                        <Label
+                            FontSize="14"
+                            Style="{StaticResource DescriptionEtablishmentLabel}"
+                            Text="{Binding Messages}"
+                            TextColor="{StaticResource ErroColor}" />
 
                         <Frame
                             Padding="10,0"
@@ -177,7 +182,10 @@
 
                     </StackLayout>
                 </yummi:PancakeView>
-                <Button Style="{StaticResource TicketButton}" Text="Pagar" />
+                <Button
+                    Command="{Binding PaymentCommand}"
+                    Style="{StaticResource TicketButton}"
+                    Text="Pagar" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

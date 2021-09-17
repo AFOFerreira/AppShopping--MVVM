@@ -12,7 +12,15 @@ namespace AppShopping.ViewModels
 {
     public class TicketScanViewModel : BaseViewModel
     {
-        public string TicketNumber { get; set; }
+        private string _ticketNumber;
+
+        public string TicketNumber { get
+            {
+                return _ticketNumber;
+            } set
+            {
+                SetProperty(ref _ticketNumber, value);
+            } }
         public ICommand TicketScanCommand { get; set; }
         public ICommand TicketTextChangedCommand { get; set; }
         public ICommand TicketPaidHistoryCommand { get; set; }
@@ -33,12 +41,12 @@ namespace AppShopping.ViewModels
             TicketPaidHistoryCommand = new Command(TicketPaidHistory);
         }
 
-        private void TicketTextChange()
+        private async void TicketTextChange()
         {
            if(TicketNumber.Length == 15)
             {
                 var ticketNumber = TicketNumber.Replace(" ", string.Empty);
-                TicketProccess(ticketNumber);
+                await TicketProccess(ticketNumber);
             }
         }
 
@@ -48,12 +56,13 @@ namespace AppShopping.ViewModels
            
         }
 
-        private void TicketProccess(string ticketNumber)
+        private async Task TicketProccess(string ticketNumber)
         {
             try
             {
-                new TicketService().GetTicketInfo(ticketNumber);
-                Shell.Current.GoToAsync($"ticket/payment?number={ticketNumber}");
+                new TicketService().GetTicketToPaid(ticketNumber);
+                await Shell.Current.GoToAsync($"ticket/payment?number={ticketNumber}");
+                TicketNumber = string.Empty;
             }
             catch(Exception e)
             {
@@ -70,7 +79,7 @@ namespace AppShopping.ViewModels
                 Device.BeginInvokeOnMainThread(async () => {
                     await Shell.Current.Navigation.PopAsync();
                     Message = result.Text;
-                    TicketProccess(Message);
+                    await TicketProccess(Message);
                 });
 
             };

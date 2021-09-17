@@ -3,7 +3,11 @@
     x:Class="AppShopping.Menu"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModel="clr-namespace:AppShopping.ViewModels"
     xmlns:views="clr-namespace:AppShopping.Views">
+    <Shell.BindingContext>
+        <viewModel:MenuViewModel />
+    </Shell.BindingContext>
     <Shell.FlyoutHeader>
         <Grid
             Padding="0,25"
@@ -42,14 +46,14 @@
     </FlyoutItem>
     <ShellContent
         Title="Novidades"
-        ContentTemplate="{DataTemplate views:Stores}"
+        ContentTemplate="{DataTemplate views:News}"
         Icon="MenuIconNews" />
-    <ShellContent
+    <!--<ShellContent
         Title="Como Chegar"
         ContentTemplate="{DataTemplate views:Stores}"
-        Icon="MenuIconMaps" />
-    <ShellContent
-        Title="Wifi"
-        ContentTemplate="{DataTemplate views:Stores}"
-        Icon="MenuIconWifi" />
+        Icon="MenuIconMaps" />-->
+    <MenuItem
+        Command="{Binding OpenMapCommand}"
+        IconImageSource="MenuIconMaps"
+        Text="Como chegar" />
 </Shell>
